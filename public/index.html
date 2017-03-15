@@ -9,9 +9,9 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script><!-- load angular -->
 		<script src="javascripts/anapp.js"></script>
-
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -24,20 +24,32 @@
   <body ng-controller="mainController">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3">
-				<img src="{{ feed.rss.channel[0]['itunes:image'][0].$.href }}" style="max-width: 200px;" />
-			</div>
-			<div class="col-md-9">
+			<div class="col-md-8">
+				<p>Podcast</p>
+				<select id="feed" ng-init="selectedFeed = 'kva'" ng-model="selectedFeed" ng-change="changeSelect(selectedFeed)"  >
+					<option ng-repeat="feed in podcasts" ng-selected="{{'kva' == feed.name}}"  value="{{ feed.name }}">{{ feed.label }}</option>
+				</select>
 			</div>
 		</div>
 		<div class="row">
-			<div class="" ng-repeat="i in feed.rss.channel[0].item">
-				<p>
-					<label>
-						 {{ i.title[0] }} <a href="{{ i.enclosure[0].$.url }}" target="_blank">--&gt;</a> by {{ i["itunes:author"][0] }}
-					</label>
-				</p>
-			</div>			
+			<div class="col-md-3">
+				<img ng-src="{{ feed.channel.image }}" style="max-width: 97%;" />
+			</div>
+			<div class="col-md-9">
+				<div class="" ng-repeat="i in feed.channel.items">
+					<p>
+						<label>
+							 <a href="{{ i.enclosure.url }}" target="_blank" download >
+								<i class="fa fa-2x fa-download"></i>
+							 </a> 
+							 {{ i.title }} 
+						</label>
+					</p>
+				</div>				
+			</div>
+		</div>
+		<div class="row">
+		
 		</div>
 	</div>
 

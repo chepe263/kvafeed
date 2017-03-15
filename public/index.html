@@ -29,6 +29,8 @@
 				<select id="feed" ng-init="selectedFeed = 'kva'" ng-model="selectedFeed" ng-change="changeSelect(selectedFeed)"  >
 					<option ng-repeat="feed in podcasts" ng-selected="{{'kva' == feed.name}}"  value="{{ feed.name }}">{{ feed.label }}</option>
 				</select>
+				<br />
+				<br />
 			</div>
 		</div>
 		<div class="row">

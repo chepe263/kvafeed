@@ -10,6 +10,7 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		,'corsten': {'name': 'corsten', 'label': 'Corsten\'s Countdown', 'url': 'http://ferrycorsten.podtree.com/feed/podcast/'}
 		,'departure': {'name': 'departure', 'label': 'International Departures with Shane 54', 'url': 'http://internationaldepartures.podbean.com/feed/'}
 		,'gdjb': {'name': 'gdjb', 'label': 'Markus Schulz Presents Global DJ Broadcast', 'url': 'http://gdjb.podbean.com/feed/'}
+		,'ridefm': {'name': 'ridefm', 'label': 'Ride Radio by Myon', 'url': 'https://rideradio.podbean.com/feed/'}
 
 	};
 	$scope.updateFeed = function(val){

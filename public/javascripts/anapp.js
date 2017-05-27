@@ -1,7 +1,7 @@
 var kvafeed = angular.module('kvafeed', []);
 
 kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) {
-	//$scope.selectedFeed = 'kva';
+	
 	$scope.podcasts = {
 	//,{'name': '', 'label': '', 'url': ''}
 		'kva' :  {'name': 'kva', 'label': 'Euphonic Sessions with Kyau & Albert', 'url': 'http://www.kyauandalbert.com/EuphonicSessions-Podcast-KyauandAlbert.xml'}
@@ -41,6 +41,7 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		sessionStorage.setItem('last_selected_feed', selectedFeed);
 		$scope.updateFeed(selectedFeed);
 	}
+	$scope.selectedFeed = sessionStorage.getItem('last_selected_feed') || 'kva';
 	$scope.changeSelect(sessionStorage.getItem('last_selected_feed') || 'kva');
 	//document.getElementById('feed').value = "kva";
 }]);

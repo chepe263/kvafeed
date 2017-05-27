@@ -18,6 +18,7 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 	$scope.updateFeed = function(val){
 		val = val || 'kva';
 		feedUrl = $scope.podcasts[val].url;
+		document.title = $scope.podcasts[val].label;
 		cachedFeed = sessionStorage.getItem('cache_feed_' + val);
 		if (cachedFeed){
 			$scope.feed = JSON.parse(cachedFeed);
@@ -36,8 +37,8 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 	$scope.changeSelect = function(selectedFeed){
 		//console.log("ldld ", selectedFeed)
 		//$scope.updateFeed(document.getElementById('feed').value);
-		document.title = $scope.podcasts[selectedFeed].label;
-		sessionStorage.setItem('last_selected_feed', val);
+		
+		sessionStorage.setItem('last_selected_feed', selectedFeed);
 		$scope.updateFeed(selectedFeed);
 	}
 	$scope.updateFeed(sessionStorage.getItem('last_selected_feed') || 'kva');

@@ -40,6 +40,6 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		sessionStorage.setItem('last_selected_feed', val);
 		$scope.updateFeed(selectedFeed);
 	}
-	$scope.updateFeed(sessionStorage.setItem('last_selected_feed') || 'kva');
+	$scope.updateFeed(sessionStorage.getItem('last_selected_feed') || 'kva');
 	//document.getElementById('feed').value = "kva";
 }]);

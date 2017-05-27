@@ -26,6 +26,7 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		$http.get('https://podcast-parser.herokuapp.com/feed?url=' + encodeURIComponent(feedUrl))
 			.success(function(data){
 				$scope.feed = data;
+				
 				sessionStorage.setItem('cache_feed_' + val, JSON.stringify(data));
 			})
 			.error(function(data) {
@@ -35,8 +36,10 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 	$scope.changeSelect = function(selectedFeed){
 		//console.log("ldld ", selectedFeed)
 		//$scope.updateFeed(document.getElementById('feed').value);
+		document.title = $scope.podcasts[selectedFeed].label;
+		sessionStorage.setItem('last_selected_feed', val);
 		$scope.updateFeed(selectedFeed);
 	}
-	$scope.updateFeed('kva');
+	$scope.updateFeed(sessionStorage.setItem('last_selected_feed') || 'kva');
 	//document.getElementById('feed').value = "kva";
 }]);

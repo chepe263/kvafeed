@@ -13,6 +13,7 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		,'ridefm': {'name': 'ridefm', 'label': 'Ride Radio by Myon', 'url': 'https://rideradio.podbean.com/feed/'}
 		,'andeeped': {'name': 'andeeped', 'label': 'The Anjunadeep Edition by Anjunadeep', 'url': 'http://static.anjunadeep.com/edition/podcast.xml'}
 		,'anjunawww': {'name': 'anjunawww', 'label': 'Anjunabeats Worldwide by Anjunabeats', 'url': 'https://static.anjunabeats.com/anjunabeats-worldwide/podcast.xml'}
+		,'togetherweare': {'name': 'togetherweare', 'label': 'Together FM by Arty', 'url': 'http://artymusic.podbean.com/feed/'}
 
 	};
 	$scope.updateFeed = function(val){

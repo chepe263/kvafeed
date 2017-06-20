@@ -41,10 +41,10 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		//console.log("ldld ", selectedFeed)
 		//$scope.updateFeed(document.getElementById('feed').value);
 		
-		sessionStorage.setItem('last_selected_feed', selectedFeed);
+		localStorage.setItem('last_selected_feed', selectedFeed);
 		$scope.updateFeed(selectedFeed);
 	}
-	$scope.selectedFeed = sessionStorage.getItem('last_selected_feed') || 'kva';
-	$scope.changeSelect(sessionStorage.getItem('last_selected_feed') || 'kva');
+	$scope.selectedFeed = localStorage.getItem('last_selected_feed') || 'kva';
+	$scope.changeSelect(localStorage.getItem('last_selected_feed') || 'kva');
 	//document.getElementById('feed').value = "kva";
 }]);

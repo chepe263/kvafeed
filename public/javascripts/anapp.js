@@ -45,6 +45,7 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		$scope.updateFeed(selectedFeed);
 	}
 	$scope.selectedFeed = localStorage.getItem('last_selected_feed') || 'kva';
-	$scope.changeSelect(localStorage.getItem('last_selected_feed') || 'kva');
+	$scope.changeSelect($scope.selectedFeed);
+	//$scope.changeSelect(localStorage.getItem('last_selected_feed') || 'kva');
 	//document.getElementById('feed').value = "kva";
 }]);

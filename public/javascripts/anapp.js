@@ -6,7 +6,7 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 	//,{'name': '', 'label': '', 'url': ''}
 		'kva' :  {'name': 'kva', 'label': 'Euphonic Sessions with Kyau & Albert', 'url': 'http://www.kyauandalbert.com/EuphonicSessions-Podcast-KyauandAlbert.xml'}
 		,'abgt': {'name': 'abgt', 'label': 'Group Therapy with Above & Beyond', 'url': 'http://static.aboveandbeyond.nu/grouptherapy/podcast.xml'}
-		,'glowradio': {'name': 'glowradio', 'label': 'Glow Radio', 'url': 'http://clubglow.podOmatic.com/rss2.xml'}
+		,'glowradio': {'name': 'glowradio', 'label': 'Glow Radio', 'url': 'http://glowradio.podomatic.com/rss2.xml'}
 		,'corsten': {'name': 'corsten', 'label': 'Corsten\'s Countdown', 'url': 'http://ferrycorsten.podtree.com/feed/podcast/'}
 		,'departure': {'name': 'departure', 'label': 'International Departures with Shane 54', 'url': 'http://internationaldepartures.podbean.com/feed/'}
 		,'gdjb': {'name': 'gdjb', 'label': 'Markus Schulz Presents Global DJ Broadcast', 'url': 'http://gdjb.podbean.com/feed/'}

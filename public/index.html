@@ -26,8 +26,8 @@
 		<div class="row">
 			<div class="col-md-8">
 				<p>Podcast</p>
-				<select id="feed" xng-init="selectedFeed = sessionStorage.getItem('last_selected_feed') || 'kva'" ng-model="selectedFeed" ng-change="changeSelect(selectedFeed)"  >
-					<option ng-repeat="feed in podcasts" ng-selected="{{'kva' == feed.name}}"  value="{{ feed.name }}">{{ feed.label }}</option>
+				<select id="feed" xng-init="selectedFeed = localStorage.getItem('last_selected_feed') || 'kva'" ng-model="selectedFeed" ng-change="changeSelect(selectedFeed)"  >
+					<option ng-repeat="feed in podcasts" ng-selected="{{ (localStorage.getItem('last_selected_feed') || 'kva' ) == feed.name}}"  value="{{ feed.name }}">{{ feed.label }}</option>
 				</select>
 				<br />
 				<br />

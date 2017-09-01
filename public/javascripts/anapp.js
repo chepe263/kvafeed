@@ -16,6 +16,7 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		,'togetherweare': {'name': 'togetherweare', 'label': 'Together FM by Arty', 'url': 'http://artymusic.podbean.com/feed/'}
 		,'asotpod': {'name': 'asotpod', 'label': 'A State of Trance Official Podcast', 'url': 'http://podcast.armadamusic.com/asot/podcast.xml'}
 		,'soundofeco': {'name': 'soundofeco', 'label': 'The Sound of You(th) by Eco', 'url': 'http://feeds.soundcloud.com/users/soundcloud:users:299597/sounds.rss'}
+		,'findyourharmony': {'name': 'findyourharmony', 'label': 'Find your Harmony by Andrew Rayel', 'url': 'http://andrewrayel.podbean.com/feed/'}
 
 	};
 	$scope.updateFeed = function(val){

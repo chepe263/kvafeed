@@ -17,6 +17,7 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		,'asotpod': {'name': 'asotpod', 'label': 'A State of Trance Official Podcast', 'url': 'http://podcast.armadamusic.com/asot/podcast.xml'}
 		,'soundofeco': {'name': 'soundofeco', 'label': 'The Sound of You(th) by Eco', 'url': 'http://feeds.soundcloud.com/users/soundcloud:users:299597/sounds.rss'}
 		,'findyourharmony': {'name': 'findyourharmony', 'label': 'Find your Harmony by Andrew Rayel', 'url': 'http://andrewrayel.podbean.com/feed/'}
+		,'I_like_it_pure': {'name': 'I_like_it_pure', 'label': 'Pure Trance Radio by Solarstone', 'url': 'https://www.thisisdistorted.com/repository/xml/SolarstonePureTrance1463143743.xml'}
 
 	};
 	$scope.updateFeed = function(val){

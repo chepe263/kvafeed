@@ -18,6 +18,10 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		,'soundofeco': {'name': 'soundofeco', 'label': 'The Sound of You(th) by Eco', 'url': 'http://feeds.soundcloud.com/users/soundcloud:users:299597/sounds.rss'}
 		,'findyourharmony': {'name': 'findyourharmony', 'label': 'Find your Harmony by Andrew Rayel', 'url': 'http://andrewrayel.podbean.com/feed/'}
 		,'I_like_it_pure': {'name': 'I_like_it_pure', 'label': 'Pure Trance Radio by Solarstone', 'url': 'https://www.thisisdistorted.com/repository/xml/SolarstonePureTrance1463143743.xml'}
+		,'Mixmash_Radio': {'name': 'Mixmash_Radio', 'label': 'Mixmash Radio by Laidback Luke', 'url': 'http://feeds.soundcloud.com/users/soundcloud:users:349864211/sounds.rss'}
+		,'NightMusic': {'name': 'NightMusic', 'label': 'The Thrillseekers\' NightMusic Podcast', 'url': 'http://www.thethrillseekers.co.uk/podcast/thrillseekers_podcast.xml'}
+		,'Obscured_Arrangement': {'name': 'Obscured_Arrangement', 'label': 'Obscured Arrangement', 'url': 'https://ia902605.us.archive.org/6/items/ObscuredArrangement/feed.xml'}
+		,'OBSCVRA': {'name': 'OBSCVRA', 'label': 'Obscured Arrangement: OBSCVRA', 'url': 'https://ia800103.us.archive.org/24/items/OBSCVRA/feed.xml'}
 
 	};
 	$scope.updateFeed = function(val){

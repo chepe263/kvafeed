@@ -6,13 +6,13 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 	//,{'name': '', 'label': '', 'url': ''}
 		'kva' :  {'name': 'kva', 'label': 'Euphonic Sessions with Kyau & Albert', 'url': 'http://www.kyauandalbert.com/EuphonicSessions-Podcast-KyauandAlbert.xml'}
 		,'abgt': {'name': 'abgt', 'label': 'Group Therapy with Above & Beyond', 'url': 'http://static.aboveandbeyond.nu/grouptherapy/podcast.xml'}
-		,'glowradio': {'name': 'glowradio', 'label': 'Glow Radio', 'url': 'http://glowradio.podomatic.com/rss2.xml'}
-		,'corsten': {'name': 'corsten', 'label': 'Corsten\'s Countdown', 'url': 'http://ferrycorsten.podtree.com/feed/podcast/'}
 		,'departure': {'name': 'departure', 'label': 'International Departures with Shane 54', 'url': 'http://internationaldepartures.podbean.com/feed/'}
 		,'gdjb': {'name': 'gdjb', 'label': 'Markus Schulz Presents Global DJ Broadcast', 'url': 'http://gdjb.podbean.com/feed/'}
 		,'ridefm': {'name': 'ridefm', 'label': 'Ride Radio by Myon', 'url': 'https://rideradio.podbean.com/feed/'}
 		,'andeeped': {'name': 'andeeped', 'label': 'The Anjunadeep Edition by Anjunadeep', 'url': 'http://static.anjunadeep.com/edition/podcast.xml'}
 		,'anjunawww': {'name': 'anjunawww', 'label': 'Anjunabeats Worldwide by Anjunabeats', 'url': 'https://static.anjunabeats.com/anjunabeats-worldwide/podcast.xml'}
+		,'glowradio': {'name': 'glowradio', 'label': 'Glow Radio', 'url': 'http://glowradio.podomatic.com/rss2.xml'}
+		,'corsten': {'name': 'corsten', 'label': 'Corsten\'s Countdown', 'url': 'http://ferrycorsten.podtree.com/feed/podcast/'}
 		,'togetherweare': {'name': 'togetherweare', 'label': 'Together FM by Arty', 'url': 'http://artymusic.podbean.com/feed/'}
 		,'asotpod': {'name': 'asotpod', 'label': 'A State of Trance Official Podcast', 'url': 'http://podcast.armadamusic.com/asot/podcast.xml'}
 		,'soundofeco': {'name': 'soundofeco', 'label': 'The Sound of You(th) by Eco', 'url': 'http://feeds.soundcloud.com/users/soundcloud:users:299597/sounds.rss'}
@@ -22,7 +22,7 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		,'NightMusic': {'name': 'NightMusic', 'label': 'The Thrillseekers\' NightMusic Podcast', 'url': 'http://www.thethrillseekers.co.uk/podcast/thrillseekers_podcast.xml'}
 		,'Obscured_Arrangement': {'name': 'Obscured_Arrangement', 'label': 'Obscured Arrangement', 'url': 'https://ia902605.us.archive.org/6/items/ObscuredArrangement/feed.xml'}
 		,'OBSCVRA': {'name': 'OBSCVRA', 'label': 'Obscured Arrangement: OBSCVRA', 'url': 'https://ia800103.us.archive.org/24/items/OBSCVRA/feed.xml'}
-
+		,'hatopod_nirvana': {'name': 'hatopod_nirvana', 'label': 'Heart Shaped Pod by Adam Tod Brown and Travis Clark', 'url': 'https://feeds.megaphone.fm/UNP6134193256'}
 	};
 	$scope.updateFeed = function(val){
 		val = val || 'kva';
@@ -52,6 +52,10 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 	}
 	$scope.selectedFeed = localStorage.getItem('last_selected_feed') || 'kva';
 	$scope.changeSelect($scope.selectedFeed);
+	$scope.formatDate = function(whatdate)
+		{
+			return moment(whatdate).format('YYYY-MMM-DD');
+		}
 	//$scope.changeSelect(localStorage.getItem('last_selected_feed') || 'kva');
 	//document.getElementById('feed').value = "kva";
 }]);

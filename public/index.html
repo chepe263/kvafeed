@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
 		<script src="//cdn.filesizejs.com/filesize.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment-with-locales.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/2.2.2/moment-duration-format.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/moment-duration-format/2.2.2/moment-duration-format.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script><!-- load angular -->
@@ -25,72 +25,100 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-controller="mainController">
-	<div class="container">
-		<div class="row">
+  <body ng-controller="mainController" id="body" class="container-fluid">
+	<div  ng-class="updating == true ? 'updating' : '' ">
+		<div class="row sticky-top">
 			<div class="col-md-8">
-				<p>Podcast</p>
-				<select id="feed" xng-init="selectedFeed = localStorage.getItem('last_selected_feed') || 'kva'" ng-model="selectedFeed" ng-change="changeSelect(selectedFeed)"  >
+				<p>Select a Podcast feed</p>
+				<select id="feed" xng-init="selectedFeed = localStorage.getItem('last_selected_feed') || 'kva'" ng-model="selectedFeed" ng-change="changeSelect(selectedFeed)"
+				ng-disabled="updating == true"
+				>
 					<option ng-repeat="feed in podcasts" ng-selected="{{ selectedFeed == feed.name}}"  value="{{ feed.name }}">{{ feed.label }}</option>
 				</select>
-				<br />
-				<br />
+				<br s_class="d-none" />
+				<br s_class="d-none" />
+			</div>
+			<div class="col-md-4">
+				<!--p class="d-none d-md-block">&nbsp;</p-->
+				<button id="btn_refresh_feed" class="d-block d-sm-inline btn btn-md btn-success btn-block" ng-click="updateFeed(selectedFeed, true)" ng-disabled="updating == true">
+					<span ng-if="updating == true">
+						<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Refreshing...
+					</span>
+					<span ng-if="updating == false">
+						<i class="fa fa-refresh" aria-hidden="true"></i> Refresh
+					</span>
+				</button>
+				<br s_class="d-block" />
+				<br s_class="d-block" />
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-3">
+		<div class="row podcast-items">
+			<div class="col-md-3 text-center">
+				<br />
 				<img ng-src="{{ feed.channel.image }}" style="max-width: 97%;" />
 				<br />
 				<br />
 			</div>
 			<div class="col-md-9">
-				<div class="" ng-repeat="i in feed.channel.items">
-					<!--p-->
-						<label class="channel-item">
+				<br />
+				<div class="channel-item" ng-repeat="i in feed.channel.items">
+					<div class="row">
+						<div class="col-md-12 podcast_item_title">
+							 <a href="{{ i.enclosure.url }}" target="_blank" download="{{ filename_from_url(i.enclosure.url) }}" >
+								{{ i.title }}
+							 </a>
+						</div>
+						<div class="col-md-12">
+							<br />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12" ng-class="(needs_limit_string(i.subtitle) || needs_limit_string(i.summary)) == true ? 'allow_expand' : ''" ng-click="expand_desc($event, this)">
+							<div class="short_desc">
+
+								<span class="fa fa-plus-square" ng-if="needs_limit_string(i.subtitle) || needs_limit_string(i.summary)"></span>
+								 <strong class="i_subtitle" ng-if="i.subtitle">
+									{{ limit_string(i.subtitle ) }}</strong>
+								 <span class="i_summary" ng-if="i.summary && (limit_string(i.summary ) !==  limit_string(i.subtitle )) && i.summary.trim().indexOf(i.subtitle.trim()) == -1">
+									<strong>:</strong> {{ limit_string(i.summary ) }}
+								 </span>
+							</div>
+							<div class="long_desc" ng-if="needs_limit_string(i.subtitle) || needs_limit_string(i.summary)">
+								<span class="fa fa-minus-square"></span>
+								<span class="i_subtitle"  ng-if="i.subtitle && i.summary.indexOf(i.subtitle) == -1">{{ i.subtitle }}</span>
+								<span class="i_summary" ng-if="i.summary">{{ br2nl(i.summary)  }}</span>
+							</div>
+						</div>
+					</div>
+					<div class="row text-center">
+						<div class="col-12 col-sm-6 col-md-3">
+							<i class="fa fa-calendar" aria-hidden="true"></i> {{ formatDate(i.pubDate) }}
+						</div>
+						<div class="col-12 col-sm-6 col-md-3">
+							<i class="fa fa-clock-o" aria-hidden="true"></i> {{ i.duration }}
+						</div>
+						<div class="col-12 col-sm-6 col-md-3">
+							<span ng-if="i.enclosure.length">
+							<i class="fa fa-file-audio-o" aria-hidden="true"></i> {{ formatFileSize(i.enclosure.length) }}
+							</span>
+						</div>
+						<div class="col-12 col-sm-6 col-md-3">
 							 <a href="{{ i.enclosure.url }}" target="_blank" download="{{ filename_from_url(i.enclosure.url) }}" >
 								<i class="fa fa-2x fa-external-link"></i>
-							 </a> 
-							 {{ i.title }}
-							 <br />
-							 <small ng-class="(needs_limit_string(i.subtitle) || needs_limit_string(i.summary)) == true ? 'allow_expand' : ''" ng-click="expand_desc($event, this)">
-								 <span class="fa fa-plus-square" ng-if="needs_limit_string(i.subtitle) || needs_limit_string(i.summary)"></span>
-								 <span class="fa fa-minus-square"></span>
-								 <span class="short_desc">
-									 <strong class="i_subtitle" ng-if="i.subtitle">
-										{{ limit_string(i.subtitle ) }}</strong>
-									 <span class="i_summary" ng-if="i.summary">
-										<strong>:</strong> {{ limit_string(i.summary ) }}
-									 </span>
-								 </span>
-								 
-								 <span class="long_desc" ng-if="needs_limit_string(i.subtitle) || needs_limit_string(i.summary)">
-									 <span class="i_subtitle"  ng-if="i.subtitle">{{ i.subtitle }}</span>
-									 
-									 <span class="i_summary" ng-if="i.summary">{{ br2nl(i.summary)  }}</span>
-								 </span>
-								 
-							 </small>
-							 <br />
-							 <small>
-								 <i class="fa fa-calendar" aria-hidden="true"></i> {{ formatDate(i.pubDate) }}
-							 </small>  //  
-							 <small>
-								 <i class="fa fa-clock-o" aria-hidden="true"></i> {{ i.duration }}
-							 </small>  //  
-							 <small>
-								 <i class="fa fa-file-audio-o" aria-hidden="true"></i> {{ formatFileSize(i.enclosure.length) }}
-							 </small>
-							 
-						</label>
-					<!--/p-->
-				</div>				
+							 </a>
+						</div>
+						<div class="col-sm-12 col-md-12">
+							<br />
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="row">
-		
+
 		</div>
 	</div>
 
-	
+
   </body>
 </html>

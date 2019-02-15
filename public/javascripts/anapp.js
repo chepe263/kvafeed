@@ -1,7 +1,7 @@
 var kvafeed = angular.module('kvafeed', []);
 
 kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) {
-	
+
 	$scope.podcasts = {
 	//,{'name': '', 'label': '', 'url': ''}
 		'kva' :  {'name': 'kva', 'label': 'Euphonic Sessions with Kyau & Albert', 'url': 'http://www.kyauandalbert.com/EuphonicSessions-Podcast-KyauandAlbert.xml'}
@@ -24,37 +24,46 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		,'OBSCVRA': {'name': 'OBSCVRA', 'label': 'Obscured Arrangement: OBSCVRA', 'url': 'https://ia800103.us.archive.org/24/items/OBSCVRA/feed.xml'}
 		,'hatopod_nirvana': {'name': 'hatopod_nirvana', 'label': 'Heart Shaped Pod by Adam Tod Brown and Travis Clark', 'url': 'https://feeds.megaphone.fm/UNP6134193256'}
 	};
-	$scope.updateFeed = function(val){
+	$scope.updating = false;
+
+	$scope.updateFeed = function(val, ignore_cache){
+		$scope.updating = true;
+		ignore_cache = ignore_cache || false;
 		val = val || 'kva';
+		$scope.selectedFeed = val;
 		feedUrl = $scope.podcasts[val].url;
 		document.title = $scope.podcasts[val].label;
-		cachedFeed = sessionStorage.getItem('cache_feed_' + val);
-		if (cachedFeed){
-			$scope.feed = JSON.parse(cachedFeed);
-			//console.log($scope.feed);
-			return;
+		if(ignore_cache == false){
+			cachedFeed = sessionStorage.getItem('cache_feed_' + val);
+			if (cachedFeed){
+				$scope.updating = false;
+				$scope.feed = JSON.parse(cachedFeed);
+				//console.log($scope.feed);
+				return;
+			}
 		}
 		$http.get('https://podcast-parser.herokuapp.com/feed?url=' + encodeURIComponent(feedUrl))
 			.success(function(data){
 				$scope.feed = data;
-				
 				sessionStorage.setItem('cache_feed_' + val, JSON.stringify(data));
+				$scope.updating = false;
 			})
 			.error(function(data) {
 				console.log('Error: ' + data);
-			});	
+				$scope.updating = false;
+			});
 	};
 	$scope.changeSelect = function(selectedFeed){
 		//console.log("ldld ", selectedFeed)
 		//$scope.updateFeed(document.getElementById('feed').value);
-		
+
 		localStorage.setItem('last_selected_feed', selectedFeed);
 		$scope.updateFeed(selectedFeed);
 	}
 	$scope.selectedFeed = localStorage.getItem('last_selected_feed') || 'kva';
 	$scope.changeSelect($scope.selectedFeed);
 	$scope.formatDate = function(whatdate)
-	{		
+	{
 		return moment(whatdate).format('YYYY-MMM-DD');
 	}
 	$scope.formatDuration = function(whatduration)
@@ -72,21 +81,21 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 	$scope.limit_string = function(input, limit){
 		const chr_limit = limit || 90;
 		if (input && input.length > chr_limit){
-			input = input.substr(0, chr_limit) + '...';
+			input = input.substr(0, chr_limit).trim() + '...';
 		}
 		return input;
 	}
 	$scope.filename_from_url = function(input){
-		return input.split(/\//g).pop();		
+		return input.split(/\//g).pop();
 	}
 	$scope.expand_desc = function(event, self){
 		if(event.currentTarget.classList.contains('allow_expand')){
 			if(event.currentTarget.classList.contains('expanded')){
 				event.currentTarget.classList.remove('expanded');
 			} else {
-				event.currentTarget.classList.add('expanded');				
+				event.currentTarget.classList.add('expanded');
 			}
-			
+			document.getElementById("body").click();
 		}
 	}
 	$scope.br2nl = function(str) {

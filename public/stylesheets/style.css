@@ -6,3 +6,43 @@ body {
 a {
   color: #00B7FF;
 }
+
+.long_desc, .channel-item .fa-minus-square{
+	display: none;
+}
+.channel-item .fa-minus-square{
+	float: left;
+}
+.long_desc{
+	padding: 1.5em;
+}
+.allow_expand{
+	display: inline-block;
+}
+.allow_expand:hover
+,.allow_expand.expanded{
+	background-color: lightgray;
+}
+	
+
+.allow_expand.expanded .short_desc
+,.allow_expand.expanded .fa-plus-square{
+	display: none;	
+}
+
+.allow_expand.expanded .fa-minus-square{
+	display: inline-block;	
+}
+.allow_expand.expanded .long_desc{
+	display: block; 
+}
+.long_desc .i_summary{
+    white-space: pre-wrap;
+    display: block;
+    margin-top: 1em;
+    border-top: 0.1rem solid white;
+    padding-top: 1em;
+}
+.long_desc .i_subtitle{
+	font-weight: bold;
+}

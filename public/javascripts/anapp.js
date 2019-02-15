@@ -31,6 +31,7 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 		cachedFeed = sessionStorage.getItem('cache_feed_' + val);
 		if (cachedFeed){
 			$scope.feed = JSON.parse(cachedFeed);
+			//console.log($scope.feed);
 			return;
 		}
 		$http.get('https://podcast-parser.herokuapp.com/feed?url=' + encodeURIComponent(feedUrl))
@@ -53,9 +54,44 @@ kvafeed.controller('mainController', ['$scope','$http', function($scope, $http) 
 	$scope.selectedFeed = localStorage.getItem('last_selected_feed') || 'kva';
 	$scope.changeSelect($scope.selectedFeed);
 	$scope.formatDate = function(whatdate)
-		{
-			return moment(whatdate).format('YYYY-MMM-DD');
+	{		
+		return moment(whatdate).format('YYYY-MMM-DD');
+	}
+	$scope.formatDuration = function(whatduration)
+	{
+		duration = moment.duration(whatduration/100, 'seconds');
+		return duration.format('hh:mm:ss');
+	}
+	$scope.formatFileSize = function(size){
+		return filesize(size);
+	}
+	$scope.needs_limit_string = function(input, limit){
+		const chr_limit = limit || 90;
+		return input && input.length > chr_limit;
+	}
+	$scope.limit_string = function(input, limit){
+		const chr_limit = limit || 90;
+		if (input && input.length > chr_limit){
+			input = input.substr(0, chr_limit) + '...';
 		}
+		return input;
+	}
+	$scope.filename_from_url = function(input){
+		return input.split(/\//g).pop();		
+	}
+	$scope.expand_desc = function(event, self){
+		if(event.currentTarget.classList.contains('allow_expand')){
+			if(event.currentTarget.classList.contains('expanded')){
+				event.currentTarget.classList.remove('expanded');
+			} else {
+				event.currentTarget.classList.add('expanded');				
+			}
+			
+		}
+	}
+	$scope.br2nl = function(str) {
+		return str.replace(/<br\s*\/?>/mg,"\n").trim();
+	}
 	//$scope.changeSelect(localStorage.getItem('last_selected_feed') || 'kva');
 	//document.getElementById('feed').value = "kva";
 }]);

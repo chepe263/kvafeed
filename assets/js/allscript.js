@@ -79,6 +79,7 @@ jQuery(document).ready(function(){
                         });
                     }
                     localStorage.setItem("last_selected_feed", this.selected_feed);
+                    document.getElementById("page_title").innerHTML = this.current_feed.label;
     
                 }
             },

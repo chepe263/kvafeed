@@ -78,7 +78,7 @@ jQuery(document).ready(function(){
                             self.selected_feed = oldVal
                         });
                     }
-                    localStorage.setItem("last_selected_feed_", this.selected_feed);
+                    localStorage.setItem("last_selected_feed", this.selected_feed);
     
                 }
             },
@@ -105,8 +105,7 @@ jQuery(document).ready(function(){
                 details: function(index){
                     this.show_list = false;
                     this.show_item_details = true;
-                    this.current_podcast_item = this.selected_feed_data.channel.items[index]
-                    console.log(this.selected_feed_data)
+                    this.current_podcast_item = this.selected_feed_data.channel.items[index];
                 },
                 return_to_list: function(){
                     this.show_list = true;

@@ -1,0 +1,9 @@
+{
+    "verbose": true,
+    "watch": [
+        "api/*",
+        "config/*",
+        "assets/js/*",
+        "assets/index.html"
+      ]
+  }

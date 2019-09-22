@@ -1,1 +1,0 @@
-SET DEBUG=kvafeed:* & npm start
